@@ -15,11 +15,11 @@ div div {
 }
 
 .cross {
-    background-image: url("x.png");
+    background-image: url("img/x.png");
     background-size: contain;
 }
 
 .circle {
-    background-image: url("o.png");
+    background-image: url("img/o.png");
     background-size: contain;
 }
