@@ -61,6 +61,7 @@ const game = (function () {
     let turn = 1;
     let turn_number = 0;
     let winner = false;
+    let scoreboard = document.getElementById('scoreboard');
 
     function clickCell() {
         if (winner || turn_number > 8) return;
@@ -77,12 +78,12 @@ const game = (function () {
         winner = gameboard.checkWinner();
 
         if (winner) {
-            //TODO
+            scoreboard.innerText = (turn ? "X" : "O") + " wins."
             return;
         }
 
         if (turn_number == 9) {
-            //TODO
+            scoreboard.innerText = 'Tie.'
         }
 
         turn = turn ? 0 : 1;

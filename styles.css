@@ -23,3 +23,8 @@ div div {
     background-image: url("img/o.png");
     background-size: contain;
 }
+
+#scoreboard {
+    text-align: center;
+    font-size: 6rem;
+}
