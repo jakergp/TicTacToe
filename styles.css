@@ -19,16 +19,19 @@ body {
 #board div {
     border: 1px solid black;
     height: 200px;
+    cursor: pointer;
 }
 
 .cross {
     background-image: url("img/x.png");
     background-size: contain;
+    cursor: default;
 }
 
 .circle {
     background-image: url("img/o.png");
     background-size: contain;
+    cursor: default;
 }
 
 #scoreboard {
@@ -45,7 +48,6 @@ body {
     
     font-size: 2rem;
     
-    cursor: pointer;
 }
 
 button {
