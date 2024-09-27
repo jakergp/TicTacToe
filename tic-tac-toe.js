@@ -54,14 +54,26 @@ const gameboard = (function () {
         }
     }
 
-    return { addMark, checkWinner, init };
+    function restartBoard() {
+        for (let i = 0; i < 9; i++) {
+            board[i] = undefined;
+
+            const div = document.getElementById(i);
+            div.className = "";
+        }
+        game.restart();
+    }
+
+    return { addMark, checkWinner, init, restartBoard };
 })();
 
 const game = (function () {
     let turn = 1;
+    let turn_start = turn;
     let turn_number = 0;
     let winner = false;
-    let scoreboard = document.getElementById('scoreboard');
+    let score = [0, 0];
+    let result = document.getElementById("result");
 
     function clickCell() {
         if (winner || turn_number > 8) return;
@@ -78,18 +90,41 @@ const game = (function () {
         winner = gameboard.checkWinner();
 
         if (winner) {
-            scoreboard.innerText = (turn ? "X" : "O") + " wins."
+            score[turn]++;
+            result.innerText = (turn ? "X" : "O") + " wins.";
+            ui.updateScore(turn, score[turn]);
             return;
         }
 
         if (turn_number == 9) {
-            scoreboard.innerText = 'Tie.'
+            result.innerText = "Tie.";
         }
 
         turn = turn ? 0 : 1;
     }
 
-    return { clickCell };
+    function restart() {
+        turn = turn_start ? 0 : 1;
+        turn_start = turn;
+        turn_number = 0;
+        winner = false;
+        result.innerText = "";
+    }
+
+    return { clickCell, restart };
+})();
+
+const ui = (function () {
+    const x_score = document.getElementById("playerX");
+    const o_score = document.getElementById("playerO");
+    const score = [o_score, x_score];
+    const restart = document.getElementById("restart");
+    restart.addEventListener("click", gameboard.restartBoard);
+    
+    function updateScore(player, n) {
+        score[player].innerText = (player ? 'X' : 'O') + " score: " + n;
+    }
+    return { updateScore };
 })();
 
 gameboard.init();
